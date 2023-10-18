@@ -7,7 +7,7 @@ import (
 )
 
 // local component
-func myHtmlHead(g htmg.HtmgCtx, title string) {
+func myHtmlHead(g htmg.Context, title string) {
 	g.Head()
 	{
 		g.Meta("charset='UTF-8'")

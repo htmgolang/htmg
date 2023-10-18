@@ -5,19 +5,19 @@ import (
 	"io"
 )
 
-type HtmgCtx struct {
-	writer io.Writer
+type Context struct {
+	io.Writer
 }
 
-func New(w io.Writer) HtmgCtx {
-	return HtmgCtx{writer: w}
+func New(w io.Writer) Context {
+	return Context{w}
 }
 
-func (c *HtmgCtx) write(str string) {
-	c.writer.Write([]byte(str))
+func (c *Context) write(str string) {
+	c.Write([]byte(str))
 }
 
-func (c *HtmgCtx) writeWithAttributes(str string, attributes []string) {
+func (c *Context) writeWithAttributes(str string, attributes []string) {
 	c.write("<")
 	c.write(str)
 	for _, attribute := range attributes {
@@ -27,848 +27,848 @@ func (c *HtmgCtx) writeWithAttributes(str string, attributes []string) {
 	c.write(">")
 }
 
-func (c *HtmgCtx) write_(str string) {
+func (c *Context) write_(str string) {
 	c.write("</")
 	c.write(str)
 	c.write(">")
 }
 
-func (c *HtmgCtx) Text(str string) {
+func (c *Context) Text(str string) {
 	c.write(str)
 }
 
-func (c *HtmgCtx) Textf(format string, a ...any) {
+func (c *Context) Textf(format string, a ...any) {
 	c.write(fmt.Sprintf(format, a...))
 }
 
-func (c *HtmgCtx) Html(attributes ...string) {
+func (c *Context) Html(attributes ...string) {
 	c.write("<!DOCTYPE html>")
 	c.writeWithAttributes("html", attributes)
 }
 
-func (c *HtmgCtx) Html_() {
+func (c *Context) Html_() {
 	c.write_("html")
 }
-func (c *HtmgCtx) A(attributes ...string) {
+func (c *Context) A(attributes ...string) {
 	c.writeWithAttributes("a", attributes)
 }
 
-func (c *HtmgCtx) A_() {
+func (c *Context) A_() {
 	c.write_("a")
 }
 
-func (c *HtmgCtx) Abbr(attributes ...string) {
+func (c *Context) Abbr(attributes ...string) {
 	c.writeWithAttributes("abbr", attributes)
 }
 
-func (c *HtmgCtx) Abbr_() {
+func (c *Context) Abbr_() {
 	c.write_("abbr")
 }
 
-func (c *HtmgCtx) Address(attributes ...string) {
+func (c *Context) Address(attributes ...string) {
 	c.writeWithAttributes("address", attributes)
 }
 
-func (c *HtmgCtx) Address_() {
+func (c *Context) Address_() {
 	c.write_("address")
 }
 
-func (c *HtmgCtx) Area(attributes ...string) {
+func (c *Context) Area(attributes ...string) {
 	c.writeWithAttributes("area", attributes)
 }
 
-func (c *HtmgCtx) Article(attributes ...string) {
+func (c *Context) Article(attributes ...string) {
 	c.writeWithAttributes("article", attributes)
 }
 
-func (c *HtmgCtx) Article_() {
+func (c *Context) Article_() {
 	c.write_("article")
 }
 
-func (c *HtmgCtx) Aside(attributes ...string) {
+func (c *Context) Aside(attributes ...string) {
 	c.writeWithAttributes("aside", attributes)
 }
 
-func (c *HtmgCtx) Aside_() {
+func (c *Context) Aside_() {
 	c.write_("aside")
 }
 
-func (c *HtmgCtx) Audio(attributes ...string) {
+func (c *Context) Audio(attributes ...string) {
 	c.writeWithAttributes("audio", attributes)
 }
 
-func (c *HtmgCtx) Audio_() {
+func (c *Context) Audio_() {
 	c.write_("audio")
 }
 
-func (c *HtmgCtx) B(attributes ...string) {
+func (c *Context) B(attributes ...string) {
 	c.writeWithAttributes("b", attributes)
 }
 
-func (c *HtmgCtx) B_() {
+func (c *Context) B_() {
 	c.write_("b")
 }
 
-func (c *HtmgCtx) Base(attributes ...string) {
+func (c *Context) Base(attributes ...string) {
 	c.writeWithAttributes("base", attributes)
 }
 
-func (c *HtmgCtx) Bdi(attributes ...string) {
+func (c *Context) Bdi(attributes ...string) {
 	c.writeWithAttributes("bdi", attributes)
 }
 
-func (c *HtmgCtx) Bdi_() {
+func (c *Context) Bdi_() {
 	c.write_("bdi")
 }
 
-func (c *HtmgCtx) Bdo(attributes ...string) {
+func (c *Context) Bdo(attributes ...string) {
 	c.writeWithAttributes("bdo", attributes)
 }
 
-func (c *HtmgCtx) Bdo_() {
+func (c *Context) Bdo_() {
 	c.write_("bdo")
 }
 
-func (c *HtmgCtx) Blockquote(attributes ...string) {
+func (c *Context) Blockquote(attributes ...string) {
 	c.writeWithAttributes("blockquote", attributes)
 }
 
-func (c *HtmgCtx) Blockquote_() {
+func (c *Context) Blockquote_() {
 	c.write_("blockquote")
 }
 
-func (c *HtmgCtx) Body(attributes ...string) {
+func (c *Context) Body(attributes ...string) {
 	c.writeWithAttributes("body", attributes)
 }
 
-func (c *HtmgCtx) Body_() {
+func (c *Context) Body_() {
 	c.write_("body")
 }
 
-func (c *HtmgCtx) Br(attributes ...string) {
+func (c *Context) Br(attributes ...string) {
 	c.writeWithAttributes("br", attributes)
 }
 
-func (c *HtmgCtx) Button(attributes ...string) {
+func (c *Context) Button(attributes ...string) {
 	c.writeWithAttributes("button", attributes)
 }
 
-func (c *HtmgCtx) Button_() {
+func (c *Context) Button_() {
 	c.write_("button")
 }
 
-func (c *HtmgCtx) Canvas(attributes ...string) {
+func (c *Context) Canvas(attributes ...string) {
 	c.writeWithAttributes("canvas", attributes)
 }
 
-func (c *HtmgCtx) Canvas_() {
+func (c *Context) Canvas_() {
 	c.write_("canvas")
 }
 
-func (c *HtmgCtx) Caption(attributes ...string) {
+func (c *Context) Caption(attributes ...string) {
 	c.writeWithAttributes("caption", attributes)
 }
 
-func (c *HtmgCtx) Caption_() {
+func (c *Context) Caption_() {
 	c.write_("caption")
 }
 
-func (c *HtmgCtx) Cite(attributes ...string) {
+func (c *Context) Cite(attributes ...string) {
 	c.writeWithAttributes("cite", attributes)
 }
 
-func (c *HtmgCtx) Cite_() {
+func (c *Context) Cite_() {
 	c.write_("cite")
 }
 
-func (c *HtmgCtx) Code(attributes ...string) {
+func (c *Context) Code(attributes ...string) {
 	c.writeWithAttributes("code", attributes)
 }
 
-func (c *HtmgCtx) Code_() {
+func (c *Context) Code_() {
 	c.write_("code")
 }
 
-func (c *HtmgCtx) Col(attributes ...string) {
+func (c *Context) Col(attributes ...string) {
 	c.writeWithAttributes("col", attributes)
 }
 
-func (c *HtmgCtx) Colgroup(attributes ...string) {
+func (c *Context) Colgroup(attributes ...string) {
 	c.writeWithAttributes("colgroup", attributes)
 }
 
-func (c *HtmgCtx) Colgroup_() {
+func (c *Context) Colgroup_() {
 	c.write_("colgroup")
 }
 
-func (c *HtmgCtx) Data(attributes ...string) {
+func (c *Context) Data(attributes ...string) {
 	c.writeWithAttributes("data", attributes)
 }
 
-func (c *HtmgCtx) Data_() {
+func (c *Context) Data_() {
 	c.write_("data")
 }
 
-func (c *HtmgCtx) Datalist(attributes ...string) {
+func (c *Context) Datalist(attributes ...string) {
 	c.writeWithAttributes("datalist", attributes)
 }
 
-func (c *HtmgCtx) Datalist_() {
+func (c *Context) Datalist_() {
 	c.write_("datalist")
 }
 
-func (c *HtmgCtx) Dd(attributes ...string) {
+func (c *Context) Dd(attributes ...string) {
 	c.writeWithAttributes("dd", attributes)
 }
 
-func (c *HtmgCtx) Dd_() {
+func (c *Context) Dd_() {
 	c.write_("dd")
 }
 
-func (c *HtmgCtx) Del(attributes ...string) {
+func (c *Context) Del(attributes ...string) {
 	c.writeWithAttributes("del", attributes)
 }
 
-func (c *HtmgCtx) Del_() {
+func (c *Context) Del_() {
 	c.write_("del")
 }
 
-func (c *HtmgCtx) Details(attributes ...string) {
+func (c *Context) Details(attributes ...string) {
 	c.writeWithAttributes("details", attributes)
 }
 
-func (c *HtmgCtx) Details_() {
+func (c *Context) Details_() {
 	c.write_("details")
 }
 
-func (c *HtmgCtx) Dfn(attributes ...string) {
+func (c *Context) Dfn(attributes ...string) {
 	c.writeWithAttributes("dfn", attributes)
 }
 
-func (c *HtmgCtx) Dfn_() {
+func (c *Context) Dfn_() {
 	c.write_("dfn")
 }
 
-func (c *HtmgCtx) Dialog(attributes ...string) {
+func (c *Context) Dialog(attributes ...string) {
 	c.writeWithAttributes("dialog", attributes)
 }
 
-func (c *HtmgCtx) Dialog_() {
+func (c *Context) Dialog_() {
 	c.write_("dialog")
 }
 
-func (c *HtmgCtx) Div(attributes ...string) {
+func (c *Context) Div(attributes ...string) {
 	c.writeWithAttributes("div", attributes)
 }
 
-func (c *HtmgCtx) Div_() {
+func (c *Context) Div_() {
 	c.write_("div")
 }
 
-func (c *HtmgCtx) Dl(attributes ...string) {
+func (c *Context) Dl(attributes ...string) {
 	c.writeWithAttributes("dl", attributes)
 }
 
-func (c *HtmgCtx) Dl_() {
+func (c *Context) Dl_() {
 	c.write_("dl")
 }
 
-func (c *HtmgCtx) Dt(attributes ...string) {
+func (c *Context) Dt(attributes ...string) {
 	c.writeWithAttributes("dt", attributes)
 }
 
-func (c *HtmgCtx) Dt_() {
+func (c *Context) Dt_() {
 	c.write_("dt")
 }
 
-func (c *HtmgCtx) Em(attributes ...string) {
+func (c *Context) Em(attributes ...string) {
 	c.writeWithAttributes("em", attributes)
 }
 
-func (c *HtmgCtx) Em_() {
+func (c *Context) Em_() {
 	c.write_("em")
 }
 
-func (c *HtmgCtx) Embed(attributes ...string) {
+func (c *Context) Embed(attributes ...string) {
 	c.writeWithAttributes("embed", attributes)
 }
 
-func (c *HtmgCtx) Fieldset(attributes ...string) {
+func (c *Context) Fieldset(attributes ...string) {
 	c.writeWithAttributes("fieldset", attributes)
 }
 
-func (c *HtmgCtx) Fieldset_() {
+func (c *Context) Fieldset_() {
 	c.write_("fieldset")
 }
 
-func (c *HtmgCtx) Figcaption(attributes ...string) {
+func (c *Context) Figcaption(attributes ...string) {
 	c.writeWithAttributes("figcaption", attributes)
 }
 
-func (c *HtmgCtx) Figcaption_() {
+func (c *Context) Figcaption_() {
 	c.write_("figcaption")
 }
 
-func (c *HtmgCtx) Figure(attributes ...string) {
+func (c *Context) Figure(attributes ...string) {
 	c.writeWithAttributes("figure", attributes)
 }
 
-func (c *HtmgCtx) Figure_() {
+func (c *Context) Figure_() {
 	c.write_("figure")
 }
 
-func (c *HtmgCtx) Footer(attributes ...string) {
+func (c *Context) Footer(attributes ...string) {
 	c.writeWithAttributes("footer", attributes)
 }
 
-func (c *HtmgCtx) Footer_() {
+func (c *Context) Footer_() {
 	c.write_("footer")
 }
 
-func (c *HtmgCtx) Form(attributes ...string) {
+func (c *Context) Form(attributes ...string) {
 	c.writeWithAttributes("form", attributes)
 }
 
-func (c *HtmgCtx) Form_() {
+func (c *Context) Form_() {
 	c.write_("form")
 }
 
-func (c *HtmgCtx) H1(attributes ...string) {
+func (c *Context) H1(attributes ...string) {
 	c.writeWithAttributes("h1", attributes)
 }
 
-func (c *HtmgCtx) H1_() {
+func (c *Context) H1_() {
 	c.write_("h1")
 }
 
-func (c *HtmgCtx) H2(attributes ...string) {
+func (c *Context) H2(attributes ...string) {
 	c.writeWithAttributes("h2", attributes)
 }
 
-func (c *HtmgCtx) H2_() {
+func (c *Context) H2_() {
 	c.write_("h2")
 }
 
-func (c *HtmgCtx) H3(attributes ...string) {
+func (c *Context) H3(attributes ...string) {
 	c.writeWithAttributes("h3", attributes)
 }
 
-func (c *HtmgCtx) H3_() {
+func (c *Context) H3_() {
 	c.write_("h3")
 }
 
-func (c *HtmgCtx) H4(attributes ...string) {
+func (c *Context) H4(attributes ...string) {
 	c.writeWithAttributes("h4", attributes)
 }
 
-func (c *HtmgCtx) H4_() {
+func (c *Context) H4_() {
 	c.write_("h4")
 }
 
-func (c *HtmgCtx) H5(attributes ...string) {
+func (c *Context) H5(attributes ...string) {
 	c.writeWithAttributes("h5", attributes)
 }
 
-func (c *HtmgCtx) H5_() {
+func (c *Context) H5_() {
 	c.write_("h5")
 }
 
-func (c *HtmgCtx) H6(attributes ...string) {
+func (c *Context) H6(attributes ...string) {
 	c.writeWithAttributes("h6", attributes)
 }
 
-func (c *HtmgCtx) H6_() {
+func (c *Context) H6_() {
 	c.write_("h6")
 }
 
-func (c *HtmgCtx) Head(attributes ...string) {
+func (c *Context) Head(attributes ...string) {
 	c.writeWithAttributes("head", attributes)
 }
 
-func (c *HtmgCtx) Head_() {
+func (c *Context) Head_() {
 	c.write_("head")
 }
 
-func (c *HtmgCtx) Header(attributes ...string) {
+func (c *Context) Header(attributes ...string) {
 	c.writeWithAttributes("header", attributes)
 }
 
-func (c *HtmgCtx) Header_() {
+func (c *Context) Header_() {
 	c.write_("header")
 }
 
-func (c *HtmgCtx) Hgroup(attributes ...string) {
+func (c *Context) Hgroup(attributes ...string) {
 	c.writeWithAttributes("hgroup", attributes)
 }
 
-func (c *HtmgCtx) Hgroup_() {
+func (c *Context) Hgroup_() {
 	c.write_("hgroup")
 }
 
-func (c *HtmgCtx) Hr(attributes ...string) {
+func (c *Context) Hr(attributes ...string) {
 	c.writeWithAttributes("hr", attributes)
 }
 
-func (c *HtmgCtx) I(attributes ...string) {
+func (c *Context) I(attributes ...string) {
 	c.writeWithAttributes("i", attributes)
 }
 
-func (c *HtmgCtx) I_() {
+func (c *Context) I_() {
 	c.write_("i")
 }
 
-func (c *HtmgCtx) Iframe(attributes ...string) {
+func (c *Context) Iframe(attributes ...string) {
 	c.writeWithAttributes("iframe", attributes)
 }
 
-func (c *HtmgCtx) Iframe_() {
+func (c *Context) Iframe_() {
 	c.write_("iframe")
 }
 
-func (c *HtmgCtx) Img(attributes ...string) {
+func (c *Context) Img(attributes ...string) {
 	c.writeWithAttributes("img", attributes)
 }
 
-func (c *HtmgCtx) Input(attributes ...string) {
+func (c *Context) Input(attributes ...string) {
 	c.writeWithAttributes("input", attributes)
 }
 
-func (c *HtmgCtx) Ins(attributes ...string) {
+func (c *Context) Ins(attributes ...string) {
 	c.writeWithAttributes("ins", attributes)
 }
 
-func (c *HtmgCtx) Ins_() {
+func (c *Context) Ins_() {
 	c.write_("ins")
 }
 
-func (c *HtmgCtx) Kbd(attributes ...string) {
+func (c *Context) Kbd(attributes ...string) {
 	c.writeWithAttributes("kbd", attributes)
 }
 
-func (c *HtmgCtx) Kbd_() {
+func (c *Context) Kbd_() {
 	c.write_("kbd")
 }
 
-func (c *HtmgCtx) Label(attributes ...string) {
+func (c *Context) Label(attributes ...string) {
 	c.writeWithAttributes("label", attributes)
 }
 
-func (c *HtmgCtx) Label_() {
+func (c *Context) Label_() {
 	c.write_("label")
 }
 
-func (c *HtmgCtx) Legend(attributes ...string) {
+func (c *Context) Legend(attributes ...string) {
 	c.writeWithAttributes("legend", attributes)
 }
 
-func (c *HtmgCtx) Legend_() {
+func (c *Context) Legend_() {
 	c.write_("legend")
 }
 
-func (c *HtmgCtx) Li(attributes ...string) {
+func (c *Context) Li(attributes ...string) {
 	c.writeWithAttributes("li", attributes)
 }
 
-func (c *HtmgCtx) Li_() {
+func (c *Context) Li_() {
 	c.write_("li")
 }
 
-func (c *HtmgCtx) Link(attributes ...string) {
+func (c *Context) Link(attributes ...string) {
 	c.writeWithAttributes("link", attributes)
 }
 
-func (c *HtmgCtx) Main(attributes ...string) {
+func (c *Context) Main(attributes ...string) {
 	c.writeWithAttributes("main", attributes)
 }
 
-func (c *HtmgCtx) Main_() {
+func (c *Context) Main_() {
 	c.write_("main")
 }
 
-func (c *HtmgCtx) Map(attributes ...string) {
+func (c *Context) Map(attributes ...string) {
 	c.writeWithAttributes("map", attributes)
 }
 
-func (c *HtmgCtx) Map_() {
+func (c *Context) Map_() {
 	c.write_("map")
 }
 
-func (c *HtmgCtx) Mark(attributes ...string) {
+func (c *Context) Mark(attributes ...string) {
 	c.writeWithAttributes("mark", attributes)
 }
 
-func (c *HtmgCtx) Mark_() {
+func (c *Context) Mark_() {
 	c.write_("mark")
 }
 
-func (c *HtmgCtx) Meta(attributes ...string) {
+func (c *Context) Meta(attributes ...string) {
 	c.writeWithAttributes("meta", attributes)
 }
 
-func (c *HtmgCtx) Meter(attributes ...string) {
+func (c *Context) Meter(attributes ...string) {
 	c.writeWithAttributes("meter", attributes)
 }
 
-func (c *HtmgCtx) Meter_() {
+func (c *Context) Meter_() {
 	c.write_("meter")
 }
 
-func (c *HtmgCtx) Nav(attributes ...string) {
+func (c *Context) Nav(attributes ...string) {
 	c.writeWithAttributes("nav", attributes)
 }
 
-func (c *HtmgCtx) Nav_() {
+func (c *Context) Nav_() {
 	c.write_("nav")
 }
 
-func (c *HtmgCtx) Noscript(attributes ...string) {
+func (c *Context) Noscript(attributes ...string) {
 	c.writeWithAttributes("noscript", attributes)
 }
 
-func (c *HtmgCtx) Noscript_() {
+func (c *Context) Noscript_() {
 	c.write_("noscript")
 }
 
-func (c *HtmgCtx) Object(attributes ...string) {
+func (c *Context) Object(attributes ...string) {
 	c.writeWithAttributes("object", attributes)
 }
 
-func (c *HtmgCtx) Object_() {
+func (c *Context) Object_() {
 	c.write_("object")
 }
 
-func (c *HtmgCtx) Ol(attributes ...string) {
+func (c *Context) Ol(attributes ...string) {
 	c.writeWithAttributes("ol", attributes)
 }
 
-func (c *HtmgCtx) Ol_() {
+func (c *Context) Ol_() {
 	c.write_("ol")
 }
 
-func (c *HtmgCtx) Optgroup(attributes ...string) {
+func (c *Context) Optgroup(attributes ...string) {
 	c.writeWithAttributes("optgroup", attributes)
 }
 
-func (c *HtmgCtx) Optgroup_() {
+func (c *Context) Optgroup_() {
 	c.write_("optgroup")
 }
 
-func (c *HtmgCtx) Option(attributes ...string) {
+func (c *Context) Option(attributes ...string) {
 	c.writeWithAttributes("option", attributes)
 }
 
-func (c *HtmgCtx) Option_() {
+func (c *Context) Option_() {
 	c.write_("option")
 }
 
-func (c *HtmgCtx) Output(attributes ...string) {
+func (c *Context) Output(attributes ...string) {
 	c.writeWithAttributes("output", attributes)
 }
 
-func (c *HtmgCtx) Output_() {
+func (c *Context) Output_() {
 	c.write_("output")
 }
 
-func (c *HtmgCtx) P(attributes ...string) {
+func (c *Context) P(attributes ...string) {
 	c.writeWithAttributes("p", attributes)
 }
 
-func (c *HtmgCtx) P_() {
+func (c *Context) P_() {
 	c.write_("p")
 }
 
-func (c *HtmgCtx) Param(attributes ...string) {
+func (c *Context) Param(attributes ...string) {
 	c.writeWithAttributes("param", attributes)
 }
 
-func (c *HtmgCtx) Picture(attributes ...string) {
+func (c *Context) Picture(attributes ...string) {
 	c.writeWithAttributes("picture", attributes)
 }
 
-func (c *HtmgCtx) Picture_() {
+func (c *Context) Picture_() {
 	c.write_("picture")
 }
 
-func (c *HtmgCtx) Pre(attributes ...string) {
+func (c *Context) Pre(attributes ...string) {
 	c.writeWithAttributes("pre", attributes)
 }
 
-func (c *HtmgCtx) Pre_() {
+func (c *Context) Pre_() {
 	c.write_("pre")
 }
 
-func (c *HtmgCtx) Progress(attributes ...string) {
+func (c *Context) Progress(attributes ...string) {
 	c.writeWithAttributes("progress", attributes)
 }
 
-func (c *HtmgCtx) Progress_() {
+func (c *Context) Progress_() {
 	c.write_("progress")
 }
 
-func (c *HtmgCtx) Q(attributes ...string) {
+func (c *Context) Q(attributes ...string) {
 	c.writeWithAttributes("q", attributes)
 }
 
-func (c *HtmgCtx) Q_() {
+func (c *Context) Q_() {
 	c.write_("q")
 }
 
-func (c *HtmgCtx) Rp(attributes ...string) {
+func (c *Context) Rp(attributes ...string) {
 	c.writeWithAttributes("rp", attributes)
 }
 
-func (c *HtmgCtx) Rp_() {
+func (c *Context) Rp_() {
 	c.write_("rp")
 }
 
-func (c *HtmgCtx) Rt(attributes ...string) {
+func (c *Context) Rt(attributes ...string) {
 	c.writeWithAttributes("rt", attributes)
 }
 
-func (c *HtmgCtx) Rt_() {
+func (c *Context) Rt_() {
 	c.write_("rt")
 }
 
-func (c *HtmgCtx) Ruby(attributes ...string) {
+func (c *Context) Ruby(attributes ...string) {
 	c.writeWithAttributes("ruby", attributes)
 }
 
-func (c *HtmgCtx) Ruby_() {
+func (c *Context) Ruby_() {
 	c.write_("ruby")
 }
 
-func (c *HtmgCtx) S(attributes ...string) {
+func (c *Context) S(attributes ...string) {
 	c.writeWithAttributes("s", attributes)
 }
 
-func (c *HtmgCtx) S_() {
+func (c *Context) S_() {
 	c.write_("s")
 }
 
-func (c *HtmgCtx) Samp(attributes ...string) {
+func (c *Context) Samp(attributes ...string) {
 	c.writeWithAttributes("samp", attributes)
 }
 
-func (c *HtmgCtx) Samp_() {
+func (c *Context) Samp_() {
 	c.write_("samp")
 }
 
-func (c *HtmgCtx) Script(attributes ...string) {
+func (c *Context) Script(attributes ...string) {
 	c.writeWithAttributes("script", attributes)
 }
 
-func (c *HtmgCtx) Script_() {
+func (c *Context) Script_() {
 	c.write_("script")
 }
 
-func (c *HtmgCtx) Section(attributes ...string) {
+func (c *Context) Section(attributes ...string) {
 	c.writeWithAttributes("section", attributes)
 }
 
-func (c *HtmgCtx) Section_() {
+func (c *Context) Section_() {
 	c.write_("section")
 }
 
-func (c *HtmgCtx) Select(attributes ...string) {
+func (c *Context) Select(attributes ...string) {
 	c.writeWithAttributes("select", attributes)
 }
 
-func (c *HtmgCtx) Select_() {
+func (c *Context) Select_() {
 	c.write_("select")
 }
 
-func (c *HtmgCtx) Small(attributes ...string) {
+func (c *Context) Small(attributes ...string) {
 	c.writeWithAttributes("small", attributes)
 }
 
-func (c *HtmgCtx) Small_() {
+func (c *Context) Small_() {
 	c.write_("small")
 }
 
-func (c *HtmgCtx) Source(attributes ...string) {
+func (c *Context) Source(attributes ...string) {
 	c.writeWithAttributes("source", attributes)
 }
 
-func (c *HtmgCtx) Span(attributes ...string) {
+func (c *Context) Span(attributes ...string) {
 	c.writeWithAttributes("span", attributes)
 }
 
-func (c *HtmgCtx) Span_() {
+func (c *Context) Span_() {
 	c.write_("span")
 }
 
-func (c *HtmgCtx) Strong(attributes ...string) {
+func (c *Context) Strong(attributes ...string) {
 	c.writeWithAttributes("strong", attributes)
 }
 
-func (c *HtmgCtx) Strong_() {
+func (c *Context) Strong_() {
 	c.write_("strong")
 }
 
-func (c *HtmgCtx) Style(attributes ...string) {
+func (c *Context) Style(attributes ...string) {
 	c.writeWithAttributes("style", attributes)
 }
 
-func (c *HtmgCtx) Style_() {
+func (c *Context) Style_() {
 	c.write_("style")
 }
 
-func (c *HtmgCtx) Sub(attributes ...string) {
+func (c *Context) Sub(attributes ...string) {
 	c.writeWithAttributes("sub", attributes)
 }
 
-func (c *HtmgCtx) Sub_() {
+func (c *Context) Sub_() {
 	c.write_("sub")
 }
 
-func (c *HtmgCtx) Summary(attributes ...string) {
+func (c *Context) Summary(attributes ...string) {
 	c.writeWithAttributes("summary", attributes)
 }
 
-func (c *HtmgCtx) Summary_() {
+func (c *Context) Summary_() {
 	c.write_("summary")
 }
 
-func (c *HtmgCtx) Sup(attributes ...string) {
+func (c *Context) Sup(attributes ...string) {
 	c.writeWithAttributes("sup", attributes)
 }
 
-func (c *HtmgCtx) Sup_() {
+func (c *Context) Sup_() {
 	c.write_("sup")
 }
 
-func (c *HtmgCtx) Svg(attributes ...string) {
+func (c *Context) Svg(attributes ...string) {
 	c.writeWithAttributes("svg", attributes)
 }
 
-func (c *HtmgCtx) Svg_() {
+func (c *Context) Svg_() {
 	c.write_("svg")
 }
 
-func (c *HtmgCtx) Table(attributes ...string) {
+func (c *Context) Table(attributes ...string) {
 	c.writeWithAttributes("table", attributes)
 }
 
-func (c *HtmgCtx) Table_() {
+func (c *Context) Table_() {
 	c.write_("table")
 }
 
-func (c *HtmgCtx) Tbody(attributes ...string) {
+func (c *Context) Tbody(attributes ...string) {
 	c.writeWithAttributes("tbody", attributes)
 }
 
-func (c *HtmgCtx) Tbody_() {
+func (c *Context) Tbody_() {
 	c.write_("tbody")
 }
 
-func (c *HtmgCtx) Td(attributes ...string) {
+func (c *Context) Td(attributes ...string) {
 	c.writeWithAttributes("td", attributes)
 }
 
-func (c *HtmgCtx) Td_() {
+func (c *Context) Td_() {
 	c.write_("td")
 }
 
-func (c *HtmgCtx) Template(attributes ...string) {
+func (c *Context) Template(attributes ...string) {
 	c.writeWithAttributes("template", attributes)
 }
 
-func (c *HtmgCtx) Template_() {
+func (c *Context) Template_() {
 	c.write_("template")
 }
 
-func (c *HtmgCtx) Textarea(attributes ...string) {
+func (c *Context) Textarea(attributes ...string) {
 	c.writeWithAttributes("textarea", attributes)
 }
 
-func (c *HtmgCtx) Textarea_() {
+func (c *Context) Textarea_() {
 	c.write_("textarea")
 }
 
-func (c *HtmgCtx) Tfoot(attributes ...string) {
+func (c *Context) Tfoot(attributes ...string) {
 	c.writeWithAttributes("tfoot", attributes)
 }
 
-func (c *HtmgCtx) Tfoot_() {
+func (c *Context) Tfoot_() {
 	c.write_("tfoot")
 }
 
-func (c *HtmgCtx) Th(attributes ...string) {
+func (c *Context) Th(attributes ...string) {
 	c.writeWithAttributes("th", attributes)
 }
 
-func (c *HtmgCtx) Th_() {
+func (c *Context) Th_() {
 	c.write_("th")
 }
 
-func (c *HtmgCtx) Thead(attributes ...string) {
+func (c *Context) Thead(attributes ...string) {
 	c.writeWithAttributes("thead", attributes)
 }
 
-func (c *HtmgCtx) Thead_() {
+func (c *Context) Thead_() {
 	c.write_("thead")
 }
 
-func (c *HtmgCtx) Time(attributes ...string) {
+func (c *Context) Time(attributes ...string) {
 	c.writeWithAttributes("time", attributes)
 }
 
-func (c *HtmgCtx) Time_() {
+func (c *Context) Time_() {
 	c.write_("time")
 }
 
-func (c *HtmgCtx) Title(attributes ...string) {
+func (c *Context) Title(attributes ...string) {
 	c.writeWithAttributes("title", attributes)
 }
 
-func (c *HtmgCtx) Title_() {
+func (c *Context) Title_() {
 	c.write_("title")
 }
 
-func (c *HtmgCtx) Tr(attributes ...string) {
+func (c *Context) Tr(attributes ...string) {
 	c.writeWithAttributes("tr", attributes)
 }
 
-func (c *HtmgCtx) Tr_() {
+func (c *Context) Tr_() {
 	c.write_("tr")
 }
 
-func (c *HtmgCtx) Track(attributes ...string) {
+func (c *Context) Track(attributes ...string) {
 	c.writeWithAttributes("track", attributes)
 }
 
-func (c *HtmgCtx) U(attributes ...string) {
+func (c *Context) U(attributes ...string) {
 	c.writeWithAttributes("u", attributes)
 }
 
-func (c *HtmgCtx) U_() {
+func (c *Context) U_() {
 	c.write_("u")
 }
 
-func (c *HtmgCtx) Ul(attributes ...string) {
+func (c *Context) Ul(attributes ...string) {
 	c.writeWithAttributes("ul", attributes)
 }
 
-func (c *HtmgCtx) Ul_() {
+func (c *Context) Ul_() {
 	c.write_("ul")
 }
 
-func (c *HtmgCtx) Var(attributes ...string) {
+func (c *Context) Var(attributes ...string) {
 	c.writeWithAttributes("var", attributes)
 }
 
-func (c *HtmgCtx) Var_() {
+func (c *Context) Var_() {
 	c.write_("var")
 }
 
-func (c *HtmgCtx) Video(attributes ...string) {
+func (c *Context) Video(attributes ...string) {
 	c.writeWithAttributes("video", attributes)
 }
 
-func (c *HtmgCtx) Video_() {
+func (c *Context) Video_() {
 	c.write_("video")
 }
 
-func (c *HtmgCtx) Wbr(attributes ...string) {
+func (c *Context) Wbr(attributes ...string) {
 	c.writeWithAttributes("wbr", attributes)
 }
