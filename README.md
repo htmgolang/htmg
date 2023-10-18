@@ -36,7 +36,7 @@ import (
 )
 
 // local component (optional)
-func myHtmlHead(g htmg.HtmgCtx, title string) {
+func myHtmlHead(g htmg.Context, title string) {
 	g.Head() // opening tag
 	{
 		g.Meta("charset='UTF-8'")
