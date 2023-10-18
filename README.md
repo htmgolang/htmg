@@ -14,6 +14,7 @@ Using this library, aside from string concatenation, is the most straightforward
 - Works with any io.Writer
 - Compatible with any editor
 - Integrates well with htmx
+- Raw HTML (sanitize your users' input before saving to the DB)
 
 ## Usage
 
@@ -87,6 +88,8 @@ func main() {
 	http.ListenAndServe(":8080", nil)
 }
 ```
+Test url: `http://localhost:8080/hello_world`
+
 
 ## License
 
